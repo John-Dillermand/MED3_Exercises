@@ -4,7 +4,13 @@ import math
 from numpy import array
 import math
 
+Rb = cv.imread("Rb.jpg")
 
+red = Rb[:, :, 2]
+green = Rb[:, :, 1]
+blue = Rb[:, :, 0]
+
+np.set_printoptions(suppress=True)
 # R = 0
 # G = 1
 # B = 2
@@ -15,7 +21,7 @@ bayerInput = array ([[ 100, 10, 100, 11],
 
 bayerOutput = np.zeros ((3,4,4))
 
-HSIOutput = np.zeros ((3,4,4))
+HSIOutput = np.zeros ((3,4,4),dtype=np.uint8)
 
 i = 0
 j = 0
@@ -44,8 +50,6 @@ for x in range (len(bayerInput)):
 # 0 = hue
 # 1 = saturation
 # 2 = intensity 
-
-
 hue = 0
 saturation = 1
 intensity = 2
@@ -76,10 +80,7 @@ for i in range(0, 4):
 
 
 
-
-
-
-
+#print(totalBayerOut/3)
 #---------------------------------------------------
 #   Calculations for Hues
 for i in range(0, 4):
@@ -98,7 +99,8 @@ print(HSIOutput)
 
 
 
-
-       
+img = HSIOutput
+cv.imshow("Image",img)
+cv.waitKey(0)
 
 #print(bayerOutput)

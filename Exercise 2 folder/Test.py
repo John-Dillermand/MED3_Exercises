@@ -3,7 +3,7 @@ import cv2
 import numpy as np
 import math
 
-img = cv2.imread("Rb.jpg")
+imgr = cv2.imread("Rb.jpg")
 
 def RGB_TO_HSI(img):
 
@@ -52,6 +52,5 @@ def RGB_TO_HSI(img):
         return hsi
 
 
-
-RGB_TO_HSI(img)
+RGB_TO_HSI(imgr)
         

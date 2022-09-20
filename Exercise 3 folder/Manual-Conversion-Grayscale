@@ -1,0 +1,55 @@
+from tkinter import Image
+import cv2 as cv
+import numpy as np
+import math
+from numpy import array
+import math
+import time
+
+Img = cv.imread("Rb.jpg")
+
+
+#Weights for the calculations from the book
+W_R = 0.21 
+
+W_G = 0.72
+
+W_B=0.07
+
+dimensions = Img.shape
+height = Img.shape[0]
+width = Img.shape[1]
+
+grayArray = np.zeros((height,width),np.uint8)
+
+Red = Img[:, :, 2]
+Green = Img[:, :, 1]
+Blue = Img[:, :, 0]
+np.set_printoptions(suppress=True)
+
+
+#ts = time.time()
+#for i in range (height):
+#    for j in range (width):
+#        grayArray[i,j] = W_R*Red[i,j]+W_G*Green[i,j]+W_B*Blue[i,j]
+#t = (time.time()- ts)
+#print("Loop: {:} ms".format(t*1000))
+
+grayCV = cv.cvtColor(Img, cv.COLOR_BGR2GRAY)
+
+
+matrix = np.array([[[ 0.07, 0.72,  0.21]]])
+ts = time.time()
+grayMatrix = cv.convertScaleAbs(np.sum(Img*matrix, axis=2))
+t = (time.time()- ts)
+print("Loop: {:} ms".format(t*1000))
+
+
+
+combo = cv.add(grayCV,grayMatrix)
+
+cv.imshow("Matrix",grayMatrix)
+cv.imshow("Array",grayArray)
+cv.imshow("Cv",grayCV)
+cv.imshow("Combo",combo)
+cv.waitKey(0)
