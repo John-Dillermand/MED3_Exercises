@@ -27,6 +27,7 @@ Green = Img[:, :, 1]
 Blue = Img[:, :, 0]
 np.set_printoptions(suppress=True)
 
+print(Red)
 
 #ts = time.time()
 #for i in range (height):
@@ -34,22 +35,24 @@ np.set_printoptions(suppress=True)
 #        grayArray[i,j] = W_R*Red[i,j]+W_G*Green[i,j]+W_B*Blue[i,j]
 #t = (time.time()- ts)
 #print("Loop: {:} ms".format(t*1000))
-
-grayCV = cv.cvtColor(Img, cv.COLOR_BGR2GRAY)
-
-
-matrix = np.array([[[ 0.07, 0.72,  0.21]]])
-ts = time.time()
-grayMatrix = cv.convertScaleAbs(np.sum(Img*matrix, axis=2))
-t = (time.time()- ts)
-print("Loop: {:} ms".format(t*1000))
-
-
-
-combo = cv.add(grayCV,grayMatrix)
-
-cv.imshow("Matrix",grayMatrix)
-cv.imshow("Array",grayArray)
-cv.imshow("Cv",grayCV)
-cv.imshow("Combo",combo)
+#
+##grayCV = cv.cvtColor(Img, cv.COLOR_BGR2GRAY)
+#
+#
+#matrix = np.array([ 0.07, 0.72,  0.21])
+#
+#ts = time.time()
+#grayMatrix = cv.convertScaleAbs(np.sum(Img*matrix, axis=2))
+#t = (time.time()- ts)
+#print("Loop: {:} ms".format(t*1000))
+#
+#
+#
+##combo = cv.add(grayCV,grayMatrix)
+#
+##cv.imshow("Matrix",grayMatrix)
+#cv.imshow("Array",grayArray)
+#cv.imshow("Cv",grayCV)
+##cv.imshow("Combo",combo)
+cv.imshow("Red",Red)
 cv.waitKey(0)
