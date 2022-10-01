@@ -20,18 +20,14 @@ cv.inRange
 HSIOutput = np.zeros ((height,width,3),np.uint8)
 
 
-hue = 0
-saturation = 1
-intensity = 2
 
 
-
-
-for i in range(0, height):
-    for j in range(0, width):
+for i in range(height):
+    for j in range(width):
         r = int (img[i,j,2])
-        g = int (img[i,j, 1])
-        b = int (img[i,j, 0])
+        g = int (img[i,j,1])
+        b = int (img[i,j,0])
+
         #Calculations for Saturation
         MinNum = min(r,g,b)
         s = 1 - 3*(MinNum/(r + g + b))
@@ -47,9 +43,12 @@ for i in range(0, height):
         else:
             h  = ((360*np.pi)/180) - h
 
-        HSIOutput[i][j][0] = (h * 180)/np.pi
-        HSIOutput[i,j][1] = s
-        HSIOutput[i,j][2] = i
+        h = (h * 180)/np.pi
+
+        print(h)
+        print(s)
+        print(i)
+
 
 
 cv.imshow("Image",HSIOutput)
