@@ -1,34 +1,28 @@
-from locale import normalize
 import cv2 as cv
 import numpy as np
-import math
-from numpy import array
-import math
+img_rgb = cv.imread('neon-text.png')
+img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
+template = cv.imread('Heart.png')
+grayTemplate = cv.cvtColor(template, cv.COLOR_BGR2GRAY)
 
-#img = cv.imread("lion.jpg")
-#np.set_printoptions(suppress=True)
+blur = cv.GaussianBlur(img_gray,(21,21),0)
 
-#height = img.shape[0]
-#width = img.shape[1]
-
-imageSize = (4,4)
-kernel = np.array([
-            [1,2,3],
-            [4,5,6],
-            [7,8,9]])
-
-image = np.array([[100,200,0,110],
-                 [200,200,40,200],
-                 [150,0,10,50],
-                 [100,200,0,42]],np.uint8)
+#Template matching
+matchedTemplate = (cv.matchTemplate(img_gray,grayTemplate,cv.TM_CCOEFF_NORMED))
 
 
-print(kernel[1-1,1-1])
-print(kernel[1-1,1])
-print(kernel[1-1,1+1])
-print(kernel[1,1-1])
-print(kernel[1,1])
-print(kernel[1,1+1]  )
-print(kernel[1+1,1-1])
-print(kernel[1+1,1])
-print(kernel[1+1,1+1])
+#Normalization of the image
+image_norm = cv.normalize(matchedTemplate, None, norm_type=cv.NORM_MINMAX)
+
+#Threshold of the image
+imageThresh=cv.threshold(image_norm,25, 255,cv.THRESH_BINARY)
+
+cv.imshow("grayImg",img_gray)
+cv.imshow("Template",grayTemplate)
+cv.imshow("BlurredImage",blur)
+cv.imshow("matchedTemplate",matchedTemplate)
+cv.imshow("normImage", image_norm)
+
+#cv.imshow("imageNorm2",imageThresh)
+
+cv.waitKey(0)

@@ -36,7 +36,7 @@ for i in range(1,4):
     for j in range (1,4):
         temp = 0
         topRow = kernel[1-1,1-1]*image[i-1,j-1]/kernelSize + kernel[1,1-1]*image[i,j-1]/ + kernel[1-1,1+1]*image[i-1,j+1]/kernelSize
-        midRow = kernel[1,1-1]*image[i,j-1]    /kernelSize + kernel[1,1]*image[i,j]    / + kernel[1,1+1]*image[i,j+1]/kernelSize
+        midRow = kernel[1,1-1]  *image[i,j-1]    /kernelSize + kernel[1,1]  *image[i,j]  / + kernel[1,1+1]  *image[i,j+1]  /kernelSize
         botRow = kernel[1+1,1-1]*image[i+1,j-1]/kernelSize + kernel[1+1,1]*image[i+1,j]/ + kernel[1+1,1+1]*image[i+1,j+1]/kernelSize
         imageNormalized[i-1,j-1] = topRow + midRow + botRow
 
