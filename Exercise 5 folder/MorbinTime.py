@@ -1,7 +1,7 @@
 import cv2 as cv
 import numpy as np
 
-imgBGR = cv.imread('dots.gif')
+imgBGR = cv.imread('BP.png')
 imgRGB = cv.cvtColor(imgBGR,cv.COLOR_BGR2RGB)
 
 
@@ -11,5 +11,5 @@ blur = cv.GaussianBlur(imgBGR,(5,5),0)
 
 
 
-cv.imshow(blur)
+cv.imshow("image",blur)
 cv.waitKey(0)
