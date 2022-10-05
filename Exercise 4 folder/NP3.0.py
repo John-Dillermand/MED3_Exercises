@@ -45,9 +45,6 @@ for i in range(1,img.shape[0]-1):
         BlueNormalized[i-1,j-1] = BlueTopRow + BlueMidRow + BlueBotRow
 
 
-
-
-
 nomImg = cv.merge([BlueNormalized,GreenNormalized,RedNormalized])
 #print(RedNormalized)
 
