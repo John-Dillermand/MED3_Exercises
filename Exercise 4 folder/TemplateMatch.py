@@ -1,6 +1,6 @@
 import cv2 as cv
 import numpy as np
-from matplotlib import pyplot as plt
+
 img_rgb = cv.imread('neon-text.png')
 imgGray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
 template = cv.imread('Heart.png')
