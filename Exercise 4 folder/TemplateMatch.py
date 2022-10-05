@@ -2,16 +2,18 @@ import cv2 as cv
 import numpy as np
 from matplotlib import pyplot as plt
 img_rgb = cv.imread('neon-text.png')
-img_gray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
+imgGray = cv.cvtColor(img_rgb, cv.COLOR_BGR2GRAY)
 template = cv.imread('Heart.png')
-grayTemplate = cv.cvtColor(template, cv.COLOR_BGR2GRAY)
+templateGray = cv.cvtColor(template, cv.COLOR_BGR2GRAY)
 
-blur = cv.GaussianBlur(img_gray,(5,5),0)
+blur = cv.GaussianBlur(imgGray,(5,5),0)
 
 #Template matching
-matchedTemplate = cv.matchTemplate(img_gray,grayTemplate,cv.TM_CCOEFF_NORMED)
+matchedTemplate = cv.matchTemplate(imgGray,templateGray,cv.TM_CCOEFF_NORMED)
 
+#A matrix to store the result the normalized image
 resultImage = np.zeros((matchedTemplate.shape[0],matchedTemplate.shape[1]))
+
 #Normalization of the image
 print((matchedTemplate.shape[0],matchedTemplate.shape[1]))
 
