@@ -29,9 +29,6 @@ while(True):
     kernel = np.ones((5,5))
     diffFrame = cv.dilate(diffFrame,kernel,1)
     threshFrame= cv.threshold(src=diffFrame, thresh=20, maxval=255,type=cv.THRESH_BINARY)[1]
-
-
-
       # Display the resulting frame
     cv.imshow('frame', threshFrame)
       
