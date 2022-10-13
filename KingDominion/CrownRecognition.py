@@ -5,7 +5,11 @@ from numpy import array
 import math
 
 FileName = "YellowBlank3.png"
-
+crown    = 0
+crown = str(crown)
+enumerate
+sand = 0
+regions = ["sand", "water", "grass"]
 
 img = cv.imread(FileName)
 
@@ -13,7 +17,9 @@ img = cv.imread(FileName)
 height = img.shape[0]
 width = img.shape[1]
 
-
+str1 = "Test1"
+str2 = "Test2"
+str3 = "Test3"
 
 
 Red = img[:, :, 2]
@@ -21,16 +27,33 @@ Green = img[:, :, 1]
 Blue = img[:, :, 0]
 np.set_printoptions(suppress=True)
 
-print((np.sum(Red))/(height*width))
-print((np.sum(Green))/(height*width))
-print((np.sum(Blue))/(height*width))
+averageRed    = str(((np.sum(Red))  /(height*width)))
+averageGreen  = str(((np.sum(Green))/(height*width)))
+averageBlue   = str(((np.sum(Blue)) /(height*width)))
+
+averageRGB = ["RED=",averageRed,"GREEN=",averageGreen,"BLUE=",averageBlue]
+
+printToData = ["FileName=",FileName,",""RED=",averageRed,",","GREEN=",averageGreen,",","BLUE=",averageBlue,",",",crown=",crown]
 
 
-FileObject = open(r"Datasheet","r+")
 
-FileObject.write("Penis")
 
-FileObject.close()
+
+#printToData = ["FileName=",FileName,",""RED=",averageRed,",","GREEN=",averageGreen,",","BLUE=",averageBlue,",","region=",",","Crown=",crown]
+dataSheet = open("dataSheet", "r+")
+
+dataSheet.writelines(printToData)
+
+
+
+
+
+dataSheet.close()
+
+print(averageRGB)
+
+
+
 
 #cv.imshow("Image",img)
 #cv.waitKey(0)
