@@ -54,16 +54,8 @@ currentTile = Tile(FileName,averageRed,averageGreen,averageBlue,crown,"sand")
 
 
 
-
-
-
-
-
-
-
-
 #printToData = ["FileName=",FileName,",""RED=",averageRed,",","GREEN=",averageGreen,",","BLUE=",averageBlue,",","region=",",","Crown=",crown]
-dataSheet = open("dataSheet", "w")
+dataSheet = open("dataSheet", "a")
 
 printToData = ["FileName=",currentTile.name,"\n"
                 "RED=",currentTile.R,"\n",
@@ -92,12 +84,19 @@ dataSheet.close()
 
 
 nextLine=0
-currentAverageRed = linecache.getline("dataSheet",2+nextLine)
-currentAverageGreen = linecache.getline("dataSheet",3+nextLine)
-currentAverageBlue = linecache.getline("dataSheet",4+nextLine)
+loadingCurrentAverageRed = linecache.getline("dataSheet",2+nextLine)
+loadingCurrentAverageGreen = linecache.getline("dataSheet",3+nextLine)
+loadingCurrentAverageBlue = linecache.getline("dataSheet",4+nextLine)
 
 
 #getAveragesFromFile()
+
+
+currentAverageRed   = (loadingCurrentAverageRed[loadingCurrentAverageRed.find("=")+1:loadingCurrentAverageRed.find(".")])
+currentAverageGreen = (loadingCurrentAverageGreen[loadingCurrentAverageGreen.find("=")+1:loadingCurrentAverageGreen.find(".")])
+currentAverageBlue  = (loadingCurrentAverageBlue[loadingCurrentAverageBlue.find("=")+1:loadingCurrentAverageBlue.find(".")])
+
+
 
 print(currentAverageRed)
 print(currentAverageGreen)
