@@ -8,10 +8,13 @@ img = cv.imread("1.jpg")
 lowerTresh = 0
 higherTresh = 255
 
-bino_thresh     = 5
-canny_thresh    = 5
+
 dialation       = 0
 erode           = 0
+minEdge         = 1
+maxEdge         = 1
+apatureSize     = 5
+
 
 # functions that update a variable, 
 # then call image processing function
@@ -41,12 +44,27 @@ def change_erode(val):
     thresh_callback()
 
 
+def change_minEdge(val):
+    global minEdge
+    minEdge = val
+    thresh_callback()
+
+def change_maxEdge(val):
+    global maxEdge
+    maxEdge = val
+    thresh_callback()
+
+def change_apatureSize(val):
+    global apatureSize
+    apatureSize = val
+    thresh_callback()
+
+
 
 def grayScale(val):
     imgray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
 
 # your function that processes the image
-
 
 
 source_window = 'Source'
@@ -61,12 +79,11 @@ def thresh_callback():
     ret,imggray = cv.threshold(imggray,lowerTresh,higherTresh,cv.THRESH_BINARY)
     imgErode     = cv.erode(src=imggray,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(3,3)),iterations=erode)
     imgDialat     = cv.dilate(src=imgErode,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(3,3)),iterations=dialation)
+    blur = cv.blur(imgDialat,(minEdge,maxEdge),0)
+    #edges = cv.Canny(imgDialat,minEdge,maxEdge,apatureSize)
 
-
-
-
-
-    cv.imshow("Source",imgDialat)
+    #edges = cv.Canny(src=imgDialat,dst=None,threshold1=minEdge,threshold2=maxEdge,apertureSize=apatureSize,L2gradient=False)
+    cv.imshow("Source",blur)
 
 
 
@@ -83,7 +100,9 @@ cv.createTrackbar('Thres:', source_window, thresh, max_thresh, change_lowerTresh
 #cv.createTrackbar('higherTresh:', source_window, thresh, max_thresh, change_higherTresh)
 cv.createTrackbar('Erode:', source_window, 0, 5, change_erode)
 cv.createTrackbar('Dialation:', source_window, 0, 5, change_dialation)
-
+cv.createTrackbar('MinEdge:', source_window, 0, 200, change_minEdge)
+cv.createTrackbar('MaxEdge:', source_window, 0, 200, change_maxEdge)
+cv.createTrackbar('ApatureSizeEdge:', source_window, 0, 10, change_maxEdge)
 
 thresh_callback()
 
