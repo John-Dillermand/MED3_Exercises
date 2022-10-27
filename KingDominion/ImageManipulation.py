@@ -77,13 +77,13 @@ def thresh_callback():
     cv.imshow("Source",imggray)
     
     ret,imggray = cv.threshold(imggray,lowerTresh,higherTresh,cv.THRESH_BINARY)
-    imgErode     = cv.erode(src=imggray,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(3,3)),iterations=erode)
-    imgDialat     = cv.dilate(src=imgErode,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(3,3)),iterations=dialation)
-    blur = cv.blur(imgDialat,(minEdge,maxEdge),0)
+    imgErode     = cv.erode(src=imggray,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(5,5)),iterations=erode)
+    imgDialat     = cv.dilate(src=imgErode,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(5,5)),iterations=dialation)
+    #denoised = cv.fastNlMeansDenoising(src=imgDialat,h=apatureSize,templateWindowSize=7,searchWindowSize=21)
     #edges = cv.Canny(imgDialat,minEdge,maxEdge,apatureSize)
 
     #edges = cv.Canny(src=imgDialat,dst=None,threshold1=minEdge,threshold2=maxEdge,apertureSize=apatureSize,L2gradient=False)
-    cv.imshow("Source",blur)
+    cv.imshow("Source",imgDialat)
 
 
 
@@ -102,7 +102,7 @@ cv.createTrackbar('Erode:', source_window, 0, 5, change_erode)
 cv.createTrackbar('Dialation:', source_window, 0, 5, change_dialation)
 cv.createTrackbar('MinEdge:', source_window, 0, 200, change_minEdge)
 cv.createTrackbar('MaxEdge:', source_window, 0, 200, change_maxEdge)
-cv.createTrackbar('ApatureSizeEdge:', source_window, 0, 10, change_maxEdge)
+#cv.createTrackbar('ApatureSizeEdge:', source_window, 0, 10, change_apatureSize)
 
 thresh_callback()
 
