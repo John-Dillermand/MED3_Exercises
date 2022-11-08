@@ -77,13 +77,25 @@ def thresh_callback():
     cv.imshow("Source",imggray)
     
     ret,imggray = cv.threshold(imggray,lowerTresh,higherTresh,cv.THRESH_BINARY)
-    imgErode     = cv.erode(src=imggray,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(5,5)),iterations=erode)
-    imgDialat     = cv.dilate(src=imgErode,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(5,5)),iterations=dialation)
-    #denoised = cv.fastNlMeansDenoising(src=imgDialat,h=apatureSize,templateWindowSize=7,searchWindowSize=21)
-    #edges = cv.Canny(imgDialat,minEdge,maxEdge,apatureSize)
+    imgErode     = cv.erode(src=imggray,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(3,3)),iterations=erode)
+    imgDialat     = cv.dilate(src=imgErode,dst=None,kernel=cv.getStructuringElement(cv.MORPH_RECT,(3,3)),iterations=dialation)
 
-    #edges = cv.Canny(src=imgDialat,dst=None,threshold1=minEdge,threshold2=maxEdge,apertureSize=apatureSize,L2gradient=False)
+
+    blur = cv.GaussianBlur(imgDialat,(5,5),0)
+    median = cv.medianBlur(imgDialat,5)
+
+    edges = cv.Canny(blur,100,200)
+    #Denoise fucking wrecks the performance 
+    #denoised = cv.fastNlMeansDenoising(src=imgDialat,h=10,templateWindowSize=7,searchWindowSize=21)
+    #edges = cv.Canny(imgDialat,minEdge,maxEdge,apatureSize)
+    #cv.imshow("Denoised",denoised)
+
+
     cv.imshow("Source",imgDialat)
+    cv.imshow("Edgey",edges)
+    cv.imshow("Blur",blur)
+    cv.imshow("median",median)
+
 
 
 
@@ -100,7 +112,7 @@ cv.createTrackbar('Thres:', source_window, thresh, max_thresh, change_lowerTresh
 #cv.createTrackbar('higherTresh:', source_window, thresh, max_thresh, change_higherTresh)
 cv.createTrackbar('Erode:', source_window, 0, 5, change_erode)
 cv.createTrackbar('Dialation:', source_window, 0, 5, change_dialation)
-cv.createTrackbar('MinEdge:', source_window, 0, 200, change_minEdge)
+cv.createTrackbar('BlurValue:', source_window, 0, 200, change_minEdge)
 cv.createTrackbar('MaxEdge:', source_window, 0, 200, change_maxEdge)
 #cv.createTrackbar('ApatureSizeEdge:', source_window, 0, 10, change_apatureSize)
 
