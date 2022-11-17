@@ -4,7 +4,7 @@ import numpy as np
 from matplotlib import pyplot as plt
   
 # define a video capture object
-vid = cv.VideoCapture(0)
+vid = cv.VideoCapture(1)
 
 frameCount = 0
 previousFrame = None
@@ -39,3 +39,4 @@ while(True):
 vid.release()
 # Destroy all the windows
 cv.destroyAllWindows()
+
